@@ -18,7 +18,7 @@ ___( o)>
     self.face_left = True
     self.height = 4
     self.width = 8
-    self.position = WIDTH//2
+    self.position = WIDTH//3
 
   def face(self, face_left):
     self.face_left = face_left
@@ -39,11 +39,11 @@ ___( o)>
       print(self.duck_right)
 
   def display_with_rain(self, width):
-    duck = self.duck if not self.face_left else self.duck_right
+    duck = self.duck if self.face_left else self.duck_right
     duck = duck.split("\n")
     for i in range(self.height):
-      rain_left = [choice("                     |          ") for _ in range(width - self.position)]
-      rain_right = [choice("                     |          ") for _ in range(self.position)]
+      rain_right = [choice("                     |          ") for _ in range(width - self.position)]
+      rain_left = [choice("                     |          ") for _ in range(self.position)]
       print("".join(rain_left + [duck[i]] + rain_right))
   
 
@@ -65,7 +65,7 @@ def display(duck: Duck, heigth, width, river):
       print("".join(["^" for _ in range(width)]))
     
 WIDTH = 120
-HEIGTH = 30
+HEIGTH = 20
 
 if __name__ == "__main__":
   Pupi = Duck(WIDTH)
