@@ -19,6 +19,7 @@ ___( o)>
     self.height = 4
     self.width = 8
     self.position = WIDTH//3
+    self.last_move = 0
 
   def face(self, face_left):
     self.face_left = face_left
@@ -26,9 +27,13 @@ ___( o)>
 
   def move(self, step):
     if step > 0:
+      self.last_move = 1
       self.face(False)
     elif step < 0:
+      self.last_move = -1
       self.face(True)
+    else:
+      self.last_move = 0
     self.position += step
     return self
   
@@ -71,10 +76,12 @@ if __name__ == "__main__":
   Pupi = Duck(WIDTH)
   while 1:
     sleep(0.05)
-    if Pupi.face_left:
-      Pupi.move(choice([-1,-1,-1,0,1]) * 3)
+    if Pupi.last_move == -1:
+      Pupi.move(choice([-1,-1,-1,-1,-1,0,1]) * 3)
+    elif Pupi.last_move == 1:
+      Pupi.move(choice([-1,0,1,1,1,1,1]) * 4)
     else:
-      Pupi.move(choice([-1,0,1,1,1]) * 4)
+      Pupi.move(choice([-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]) * 2)
     if Pupi.position > HEIGTH - Pupi.height:
       Pupi.position = HEIGTH
     elif Pupi.position < Pupi.width:
