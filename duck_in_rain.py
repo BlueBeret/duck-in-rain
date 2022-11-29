@@ -68,7 +68,7 @@ def display(duck: Duck, heigth, width, river):
     Pupi.display_with_rain(WIDTH)
     for _ in range(river):
       print("".join(["^" for _ in range(width)]))
-    
+    print(duck.position) 
 WIDTH = 120
 HEIGTH = 20
 
@@ -77,19 +77,15 @@ if __name__ == "__main__":
   while 1:
     sleep(0.05)
     if Pupi.last_move == -1:
-      Pupi.move(choice([-1,-1,-1,-1,-1,0,1]) * 3)
+      Pupi.move(choice([-1,-1]* 8 + [0,1]) * 1)
     elif Pupi.last_move == 1:
-      Pupi.move(choice([-1,0,1,1,1,1,1]) * 4)
+      Pupi.move(choice([-1,0] + [1,1] * 8) * 1)
     else:
       Pupi.move(choice([-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]) * 2)
-    if Pupi.position > HEIGTH - Pupi.height:
-      Pupi.position = HEIGTH
+    if Pupi.position > WIDTH-Pupi.width:
+      Pupi.position = WIDTH - Pupi.width
     elif Pupi.position < Pupi.width:
       Pupi.position = Pupi.width
 
     display(Pupi, HEIGTH, WIDTH, 10)
-
-
-
-
 
